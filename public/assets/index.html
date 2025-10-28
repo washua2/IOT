@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        img {
+            max-width: 350vw !important;
+        }
+
+        .form,
+        .videoBox {
+            width: 50vw;
+            margin: 0 auto;
+            margin-top: 39px;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .videoPageHidden {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            background-color: rgba(0, 0, 0, 0.7);
+            transition: .3s;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: .3s;
+            pointer-events: none;
+        }
+
+        #videoPage {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            background-color: rgba(0, 0, 0, 0.7);
+            transition: .3s;
+            width: 100vw;
+            height: 100vh;
+            opacity: 1;
+            transition: .3s;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hover {
+            opacity: 1;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .hover:hover {
+            opacity: 0.4;
+            transition: .3s;
+        }
+    </style>
+
+    <!-- video.js -->
+    <script src="./video.js"></script>
+    <link href="./video-js.css" rel="stylesheet" type="text/css">
+
+    <!-- flowbite -->
+    <script src="./flowbite.min.js"></script>
+    <link href="./flowbite.min.css" rel="stylesheet" />
+
+    <!-- pannellum -->
+    <script src="./pannellum.js"></script>
+    <link rel="stylesheet" href="./pannellum.css">
+    <script src="./videojs-pannellum-plugin.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="videoPage">
+            <video id="panorama" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
+                webkit-playsinline="true" playsinline x5-video-player-type="h5" crossorigin="anonymous">
+                <source id="ss" src="" type="video/mp4" />
+            </video>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("ss").src = new URLSearchParams(location.search).get("url")
+    window.v = videojs('panorama', {
+        loop: true,
+        muted: true,
+        autoPlay: true,
+        plugins: {
+            pannellum: {
+            }
+        }
+    });
+    setTimeout(() => {
+        document.getElementsByClassName("vjs-big-play-button")[0].click()
+    }, 1000)
+
+</script>
+
+</html>
